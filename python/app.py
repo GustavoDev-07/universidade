@@ -12,29 +12,61 @@ from PySide6.QtWidgets import(
     QPushButton
 )
 
-def cadastro():
-    aluno = Aluno(
-        campo_nome.text(),
-        campo_email.text(),
-        campo_cpf.text(),
-        campo_telefone.text(),
-        campo_endereco.text()
-    )
-    
-    banco = MySQL()
-    banco.connect()
-    
-    aluno.cadastrar(banco)
-    
-    banco.disconnect()
+class TelaCadastro():
+    def __init__(self):
+        self.app = QApplication(sys.argv)
+        self.janela = QWidget()
+        self.layout = QVBoxLayout()
+        
+        self.labels = []
+        self.campos = []
+        
+        self.janela.setWindowTitle("Cadastro Aluno")
+        self.janela.resize(1200, 600)
 
-app = QApplication(sys.argv)
+    def criar_componentes(self):
+        self.labels.append(QLabel("Digite seu nome:"))
+        self.labels.append(QLabel("Digite seu email:"))
+        self.labels.append(QLabel("Digite seu cpf:"))
+        self.labels.append(QLabel("Digite seu telefone:"))
+        self.labels.append(QLabel("Digite seu email:"))
+        
+        for label in self.labels:
+            self.layout.addWidget()
+            
+            campo = QLineEdit()
+            self.campos.append(campo)
+            self.layout.addWidget(campo)
 
-janela = QWidget()
-janela.setWindowTitle("Cadastro Aluno")
-janela.resize(1200, 600)
+        botao_cadastro = QPushButton("Cadastrar")
+        self.layout.addWidget(botao_cadastro)
+        
+        self.janela.setLayout(self.layout)        
+        botao_cadastro.clicked.connect(self.cadastrar)
+        
+    def cadastrar():
+        aluno = Aluno(
+            campo_nome.text(),
+            campo_email.text(),
+            campo_cpf.text(),
+            campo_telefone.text(),
+            campo_endereco.text()
+        )
+        
+        banco = MySQL()
+        banco.connect()
+        
+        aluno.cadastrar(banco)
+        
+        banco.disconnect()
 
-layout = QVBoxLayout()
+#app = QApplication(sys.argv)
+
+#janela = QWidget()
+#janela.setWindowTitle("Cadastro Aluno")
+#anela.resize(1200, 600)
+
+#layout = QVBoxLayout()
 
 #Componentes
 label_nome = QLabel("Digite seu nome: ")
