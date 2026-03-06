@@ -21,8 +21,6 @@ class App:
         self.janela.setWindowTitle("Sistema Universidade")
         self.janela.resize(400, 200)
         self.janela.setLayout(self.layout)
-
-        # Tema suave geral da aplicação
         self.janela.setStyleSheet("""
             QWidget {
                 background-color: #1c1f26;
@@ -37,8 +35,6 @@ class App:
         self.janela.show()
 
     def criar_botoes(self):
-
-        # BOTÃO LISTAR (AZUL SUAVE + NEON)
         botao_listar = QPushButton("Listar")
         botao_listar.setMinimumHeight(45)
 
@@ -65,8 +61,6 @@ class App:
         self.layout.addWidget(botao_listar)
         botao_listar.clicked.connect(self.abrir_listagem)
 
-
-        # BOTÃO CADASTRAR (VERMELHO SUAVE + NEON)
         botao_cadastrar = QPushButton("Cadastrar")
         botao_cadastrar.setMinimumHeight(45)
 

@@ -24,8 +24,6 @@ class Cadastro():
     
     def configurar_janela(self):
         self.janela.setWindowTitle("Cadastro Aluno")
-
-        # Tema visual (mesma paleta do botão cadastrar)
         self.janela.setStyleSheet("""
 
             QWidget{
@@ -73,8 +71,6 @@ class Cadastro():
                 border: 2px solid #ff7a7a;
             }
         """)
-
-        # 🔹 Ajusta dinamicamente ao tamanho da tela
         screen = self.app.primaryScreen().availableGeometry()
         largura = int(screen.width() * 0.4)
         altura = int(screen.height() * 0.6)
@@ -105,23 +101,16 @@ class Cadastro():
         
         botao_cadastro.clicked.connect(self.cadastrar)
         
-    # 🔹 MÉTODO SEPARADO DE VALIDAÇÃO
     def validar_campos(self):
         nome = self.campos["nome"].text().strip()
         email = self.campos["email"].text().strip()
         cpf = self.campos["cpf"].text().strip()
         telefone = self.campos["telefone"].text().strip()
         endereco = self.campos["endereco"].text().strip()
-
-        # Campos vazios
         if not all([nome, email, cpf, telefone, endereco]):
             raise ValueError("Todos os campos devem ser preenchidos.")
-
-        # CPF deve conter apenas números e ter 11 dígitos
         if not cpf.isdigit() or len(cpf) != 11:
             raise ValueError("CPF deve conter 11 números.")
-
-        # Telefone deve conter apenas números
         if not telefone.isdigit():
             raise ValueError("Telefone deve conter apenas números.")
 
@@ -129,7 +118,6 @@ class Cadastro():
         
     def cadastrar(self):
         try:
-            # Primeiro valida
             self.validar_campos()
 
             aluno = Aluno(

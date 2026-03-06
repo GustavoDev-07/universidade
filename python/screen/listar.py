@@ -22,8 +22,6 @@ class Listar:
  
     def configurar_janela(self):
         self.janela.setWindowTitle("Listagem de Alunos")
- 
-        # Tema visual azul neon suave
         self.janela.setStyleSheet("""
  
             QWidget{
