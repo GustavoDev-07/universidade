@@ -25,6 +25,55 @@ class Cadastro():
     def configurar_janela(self):
         self.janela.setWindowTitle("Cadastro Aluno")
 
+        # Tema visual (mesma paleta do botão cadastrar)
+        self.janela.setStyleSheet("""
+
+            QWidget{
+                background-color: #1c1f26;
+                color: #e6e6e6;
+                font-size: 14px;
+                font-family: Segoe UI, Arial;
+            }
+
+            QLabel{
+                margin-top: 6px;
+                color: #ffdede;
+            }
+
+            QLineEdit{
+                background-color: #2a2222;
+                border: 2px solid #ff2a2a;
+                border-radius: 10px;
+                padding: 6px;
+                color: #ffffff;
+            }
+
+            QLineEdit:focus{
+                border: 2px solid #ff4d6d;
+                background-color: #332626;
+            }
+
+            QPushButton{
+                background-color: #3a2a2a;
+                border: 2px solid #ff2a2a;
+                border-radius: 16px;
+                color: #ffe3e3;
+                padding: 10px;
+                margin-top: 10px;
+                font-weight: bold;
+            }
+
+            QPushButton:hover{
+                border: 2px solid #ff4d6d;
+                background-color: #463030;
+            }
+
+            QPushButton:pressed{
+                background-color: #2e2020;
+                border: 2px solid #ff7a7a;
+            }
+        """)
+
         # 🔹 Ajusta dinamicamente ao tamanho da tela
         screen = self.app.primaryScreen().availableGeometry()
         largura = int(screen.width() * 0.4)
@@ -64,15 +113,15 @@ class Cadastro():
         telefone = self.campos["telefone"].text().strip()
         endereco = self.campos["endereco"].text().strip()
 
-        # 1️⃣ Campos vazios
+        # Campos vazios
         if not all([nome, email, cpf, telefone, endereco]):
             raise ValueError("Todos os campos devem ser preenchidos.")
 
-        # 3️⃣ CPF deve conter apenas números e ter 11 dígitos
+        # CPF deve conter apenas números e ter 11 dígitos
         if not cpf.isdigit() or len(cpf) != 11:
             raise ValueError("CPF deve conter 11 números.")
 
-        # 4️⃣ Telefone deve conter apenas números
+        # Telefone deve conter apenas números
         if not telefone.isdigit():
             raise ValueError("Telefone deve conter apenas números.")
 
@@ -80,7 +129,7 @@ class Cadastro():
         
     def cadastrar(self):
         try:
-            # 🔹 Primeiro valida
+            # Primeiro valida
             self.validar_campos()
 
             aluno = Aluno(
@@ -115,4 +164,3 @@ class Cadastro():
     def limpar_campos(self):
         for campo in self.campos.values():
             campo.clear()
-            
